@@ -2,30 +2,30 @@
   "Wraps the OWASP HTML Sanitizer library."
   (:require [clojure.string :as string])
   (:import [org.owasp.html AttributePolicy
-            ElementPolicy
-            HtmlPolicyBuilder
-            HtmlSanitizer
-            HtmlSanitizer$Policy
-            PolicyFactory
-            Sanitizers]))
+                           ElementPolicy
+                           HtmlPolicyBuilder
+                           HtmlSanitizer
+                           HtmlSanitizer$Policy
+                           PolicyFactory
+                           Sanitizers]))
 
 (defn read-flat-key-val-sequence
   "Reads a flat sequence of key and (optional) values into proper key-value
   pairs. Keys are identified by key? returning true."
   ([options]
-     (read-flat-key-val-sequence options keyword?))
+   (read-flat-key-val-sequence options keyword?))
   ([options key?]
-     (if (seq options)
-       (loop [[k & tail] options, result []]
-         (if (key? k)
-           (let [[v tail] (if (key? (first tail))
-                            [nil tail]
-                            [(first tail) (rest tail)])]
-             (if (seq tail)
-               (recur tail (conj result [k v]))
-               (conj result [k v])))
-           (throw (Exception. (str "Expected key, got non-key '" k "'")))))
-       (vector))))
+   (if (seq options)
+     (loop [[k & tail] options, result []]
+       (if (key? k)
+         (let [[v tail] (if (key? (first tail))
+                          [nil tail]
+                          [(first tail) (rest tail)])]
+           (if (seq tail)
+             (recur tail (conj result [k v]))
+             (conj result [k v])))
+         (throw (Exception. (str "Expected key, got non-key '" k "'")))))
+     (vector))))
 
 (defn- attr-policy [f]
   (proxy [AttributePolicy] []
@@ -108,11 +108,11 @@
   builder)
 
 (def predefined-policies
-  {:BLOCKS      Sanitizers/BLOCKS
-   :FORMATTING  Sanitizers/FORMATTING
-   :IMAGES      Sanitizers/IMAGES
-   :LINKS       Sanitizers/LINKS
-   :STYLES      Sanitizers/STYLES})
+  {:BLOCKS     Sanitizers/BLOCKS
+   :FORMATTING Sanitizers/FORMATTING
+   :IMAGES     Sanitizers/IMAGES
+   :LINKS      Sanitizers/LINKS
+   :STYLES     Sanitizers/STYLES})
 
 (defn policy
   "Access a predefined policy or create one from a sequence of options."

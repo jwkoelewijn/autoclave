@@ -1,4 +1,4 @@
-(defproject com.nedap.staffing-solutions/autoclave "0.2.0"
+(defproject com.nedap.staffing-solutions/autoclave "0.2.1"
   :description "A library for safely handling various kinds of user input."
   :url "http://github.com/alxlit/autoclave"
   :license {:name "Eclipse Public License"

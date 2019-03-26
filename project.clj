@@ -1,10 +1,18 @@
-(defproject alxlit/autoclave "0.2.0"
+(defproject com.nedap.staffing-solutions/autoclave "0.2.0"
   :description "A library for safely handling various kinds of user input."
   :url "http://github.com/alxlit/autoclave"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :codox {:output-path "doc/codox"
           :source-uri "http://github.com/alxlit/autoclave/blob/{version}/{filepath}#L{line}"}
+  :repositories {"releases" {:url      "https://nedap.jfrog.io/nedap/staffing-solutions/"
+                             :username :env/artifactory_user
+                             :password :env/artifactory_pass}}
+  :deploy-repositories [["releases" {:url           "https://nedap.jfrog.io/nedap/staffing-solutions/"
+                                     :sign-releases false}]]
+  :repository-auth {#"https://nedap.jfrog\.io/nedap/staffing-solutions/"
+                    {:username :env/artifactory_user
+                     :password :env/artifactory_pass}}
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.pegdown/pegdown "1.6.0"]
                  [commons-codec "1.4"]
